@@ -16,28 +16,67 @@ class Calculator {
     }
 
     appendNum(number) {
+        if (number === '.') {
+            if (this.curOperand.includes('.'))
+                return
+            if (this.curOperand === '')
+                this.curOperand = 0
+        }
         this.curOperand = this.curOperand + number.toString()
     }
 
     chooseOp(operation) {
+        if (this.curOperand === '')
+            return
+        if (this.prevOperand !== '')
+            this.calculate()
         this.operation = operation
+        this.prevOperand = this.curOperand
+        this.curOperand = ''
+    }
+
+    formatNumber(number) {
+        const numString = number.toString()
+        const real = parseFloat(numString.split('.')[0])
+        const decimal = numString.split('.')[1]
+        let visorStr
+        if (isNaN(real)) {
+            visorStr = ''
+        }
+        else {
+            visorStr = real.toLocaleString('en-US', {maximumFractionDigits: 0})
+        }
+        if (decimal != null){
+            return `${visorStr}.${decimal}`
+        }
+        else {
+            return visorStr
+        }
     }
 
     updateVisor() {
-        this.curOperandTextElement.innerText = this.curOperand
-        this.prevOperandTextElement.innerText = this.prevOperand
+        this.curOperandTextElement.innerText = this.formatNumber(this.curOperand)
+        if (this.operation != null) {
+            this.prevOperandTextElement.innerText =
+                `${this.formatNumber(this.prevOperand)} ${this.operation}`
+        }
+        else {
+            this.prevOperandTextElement.innerText = ''
+        }
     }
 
     calculate () {
         let result
         const prev = parseFloat(this.prevOperand)
         const cur = parseFloat(this.curOperand)
+        if (isNaN(prev) || isNaN(cur))
+            return
         switch (this.operation) {
             case '+':
                 result = prev + cur
                 break;
             case '-':
-                result = prev + cur
+                result = prev - cur
                 break;
             case '×':
                 result = prev * cur
@@ -45,6 +84,8 @@ class Calculator {
             case '÷':
                 result = prev / cur
                 break;
+            default:
+                return
         }
         this.operation = undefined
         this.curOperand = result
