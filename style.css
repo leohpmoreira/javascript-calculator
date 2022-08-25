@@ -1,0 +1,63 @@
+@font-face {
+    font-family: Calculator;
+    src: url("casiograph35.ttf");
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: "Calculator", sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: rgb(9,35,39);
+    background: linear-gradient(300deg, rgba(9,35,39,1) 0%, rgba(11,83,81,1) 35%, rgba(0,169,165,1) 100%);
+}
+
+.calculator-grid {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    min-height: 100vh;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: minmax(120px, auto) repeat(5,100px);
+}
+
+.calculator-grid > button {
+    cursor: pointer;
+    font-size: 2rem;
+    border: 2px solid #000000;
+    outline: none;
+    background-color: #4E8098;
+}
+
+.calculator-grid > button:hover {
+    background-color: #62A2BF;
+}
+
+.size-two {
+    grid-column: span 2;
+}
+
+.visor {
+    grid-column: 1 / -1;
+    background-color: #90C2E7;
+    border: 2px solid #000000;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    flex-direction: column;
+    padding: 10px;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.prev-operand {
+    font-size: 1.5rem;
+    color: #3c3c3c;
+}
+
+.cur-operand {
+    font-size: 2.5rem;
+}
