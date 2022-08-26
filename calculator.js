@@ -30,6 +30,12 @@ class Calculator {
             return
         if (this.prevOperand !== '')
             this.calculate()
+        if (operation === '/') {
+            operation = '÷'
+        }
+        if (operation === '*') {
+            operation = '×'
+        }
         this.operation = operation
         this.prevOperand = this.curOperand
         this.curOperand = ''
@@ -130,4 +136,24 @@ cButton.addEventListener('click', () => {
 ceButton.addEventListener('click', () => {
     calculator.ce()
     calculator.updateVisor()
+})
+
+window.addEventListener('keypress', (e) => {
+    if (e.key === '/' || e.key === '*' || e.key === '-' || e.key === '+') {
+        calculator.chooseOp(e.key)
+        calculator.updateVisor()
+    }
+    else {
+        if (e.key === '0' || e.key === '1' || e.key === '2' || e.key === '3' || e.key === '4' || e.key === '5'
+            || e.key === '6' || e.key === '7' || e.key === '8' || e.key === '9' || e.key === '.') {
+            calculator.appendNum(e.key)
+            calculator.updateVisor()
+        }
+        else {
+            if (e.key === '=' || e.key === 'Enter') {
+                calculator.calculate()
+                calculator.updateVisor()
+            }
+        }
+    }
 })
