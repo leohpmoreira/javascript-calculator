@@ -8,6 +8,7 @@
     <script src="calculator.js" defer></script>
 </head>
 <body>
+    <button data-instruction class="instrButton" >Instructions</button>
     <div class="calculator-grid">
         <div class="visor">
             <div data-prev class="prev-operand"></div>
@@ -31,6 +32,12 @@
         <button data-num>.</button>
         <button data-num>0</button>
         <button data-eq class="size-two">=</button>
+    </div>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&#10006;</span>
+            <p>Use the buttons on screen or type on your keyboard</p>
+        </div>
     </div>
 </body>
 </html>
